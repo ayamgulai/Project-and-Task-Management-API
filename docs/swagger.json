@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "project-and-task-management-api-production.up.railway.app/",
+    "host": "project-and-task-management-api-production.up.railway.app",
     "basePath": "/",
     "paths": {
         "/login": {

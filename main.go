@@ -1,7 +1,7 @@
 // @title Mini Jira Backend
 // @version 1.0
 // @description Project and Task Management API
-// @host project-and-task-management-api-production.up.railway.app/
+// @host project-and-task-management-api-production.up.railway.app
 // @BasePath /
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
