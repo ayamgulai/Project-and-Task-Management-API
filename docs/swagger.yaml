@@ -62,7 +62,7 @@ definitions:
     required:
     - status
     type: object
-host: localhost:8080
+host: project-and-task-management-api-production.up.railway.app/
 info:
   contact: {}
   description: Project and Task Management API
