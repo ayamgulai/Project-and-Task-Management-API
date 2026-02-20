@@ -57,7 +57,7 @@ func DeleteTask(id int, userEmail string, role string, userId int) (isSuccess bo
 	}
 	if role == "member" {
 		// Member hanya boleh task miliknya
-		if task.AssigneeID == nil || *task.AssigneeID != user.ID {
+		if task.AssigneeID == nil || *task.AssigneeID != userId {
 			return false, errors.New("forbidden: not your task")
 		}
 	}
