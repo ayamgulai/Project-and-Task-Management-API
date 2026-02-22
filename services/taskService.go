@@ -10,7 +10,14 @@ import (
 
 // get all tasks
 func GetTasks() ([]models.Task, error) {
-	return repositories.GetTasks()
+	listTasks, err := repositories.GetTasks()
+	if err != nil {
+		return nil, err
+	}
+	if len(listTasks) == 0 {
+		return nil, errors.New("no tasks found")
+	}
+	return listTasks, nil
 }
 
 // get task by id
@@ -18,6 +25,9 @@ func GetTaskByID(id int) (*models.Task, error) {
 	task, err := repositories.GetTaskByID(id)
 	if err != nil {
 		return nil, err
+	}
+	if task == nil {
+		return nil, errors.New("task not found")
 	}
 	return task, nil
 }
@@ -82,7 +92,14 @@ func DeleteTask(id int, userEmail string, role string, userId int) (isSuccess bo
 
 // get tasks by project id
 func GetTasksByProjectID(projectID int) ([]models.Task, error) {
-	return repositories.GetTasksByProjectID(projectID)
+	listTasks, err := repositories.GetTasksByProjectID(projectID)
+	if err != nil {
+		return nil, err
+	}
+	if len(listTasks) == 0 {
+		return nil, errors.New("no tasks found for this project")
+	}
+	return listTasks, nil
 }
 
 // update task status by id
@@ -144,5 +161,12 @@ func UpdateTaskStatus(id int, status string, userEmail string, role string) (*mo
 
 // get tasks by assignee id
 func GetTasksByAssigneeID(assigneeID int) ([]models.Task, error) {
-	return repositories.GetTasksByAssigneeID(assigneeID)
+	listTasks, err := repositories.GetTasksByAssigneeID(assigneeID)
+	if err != nil {
+		return nil, err
+	}
+	if len(listTasks) == 0 {
+		return nil, errors.New("no tasks found for this assignee")
+	}
+	return listTasks, nil
 }

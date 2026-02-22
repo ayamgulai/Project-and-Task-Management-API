@@ -9,7 +9,14 @@ import (
 
 // get all projects
 func GetProjects() ([]models.Project, error) {
-	return repositories.GetProjects()
+	listProjects, err := repositories.GetProjects()
+	if err != nil {
+		return nil, err
+	}
+	if len(listProjects) == 0 {
+		return nil, errors.New("no projects found")
+	}
+	return listProjects, nil
 }
 
 // get project by id
@@ -17,6 +24,9 @@ func GetProjectByID(id int) (*models.Project, error) {
 	project, err := repositories.GetProjectByID(id)
 	if err != nil {
 		return nil, err
+	}
+	if project == nil {
+		return nil, errors.New("project not found")
 	}
 	return project, nil
 }
@@ -39,6 +49,12 @@ func CreateProject(project models.Project, userID int, role string) (*models.Pro
 
 // update project by id
 func UpdateProject(id int, project models.Project) (*models.Project, error) {
+	if project.Name == "" {
+		return nil, errors.New("project name cannot be empty")
+	}
+	if project.Description == "" {
+		return nil, errors.New("project description cannot be empty")
+	}
 	updatedProject, err := repositories.UpdateProject(id, &project)
 	if err != nil {
 		return nil, err

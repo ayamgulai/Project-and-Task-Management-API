@@ -48,7 +48,7 @@ func GetProjectByID(c *gin.Context) {
 	}
 	project, err := services.GetProjectByID(id)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "project not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "project not found", "details": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"project": project})
